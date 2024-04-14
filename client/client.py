@@ -1,7 +1,7 @@
 import requests
 
 def post_messages(messages):
-    url = "http://localhost:8085"  # Replace with the appropriate URL
+    url = "http://35.204.35.46:8085"  # Replace with the appropriate URL
 
     try:
         response = requests.post(url, json=messages)
