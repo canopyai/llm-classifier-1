@@ -69,4 +69,4 @@ def classify_conversation():
 
 
 if __name__ == '__main__':
-    app.run(port=8085)
+    app.run(port=8080, host='0.0.0.0')
