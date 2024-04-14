@@ -1,8 +1,8 @@
 import torch
-emotion_list = ["Happy", "Sad", "Neutral", "Angry", "Disgust", "Excitement", "Fear", "Concern"]
 
-def get_input_ids(utext, tokenizer):
-    input_text = f'''You will classify the next emotion of the assistant from input conversation as one the following: [{", ".join(emotion_list)}]:
+
+def get_input_ids(utext, tokenizer, emotion_list):
+    input_text = f'''You will classify the next emotion of the user from input conversation as one the following: [{", ".join(emotion_list)}]:
 
     Here are few examples to illustrate only the format:
 

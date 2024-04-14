@@ -1,12 +1,6 @@
 import torch
 
-# Define the list of emotions
-
-emotion_list = ["Happy", "Sad", "Neutral", "Angry", "Disgust", "Excitement", "Fear", "Concern"]
-
-
-
-def normalize_probs_and_map(exp_probs):
+def normalize_probs_and_map(exp_probs, emotion_list):
     probs_list = exp_probs.tolist()
 
 

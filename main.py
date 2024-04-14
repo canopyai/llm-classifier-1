@@ -29,7 +29,7 @@ model = AutoModelForCausalLM.from_pretrained(model_id)
 
 model = model.to(device)
 
-emotion_list = ["Happy", "Sad", "Neutral", "Angry", "Disgust", "Excitement", "Fear", "Concern"]
+emotion_list = ["Happy", "Sad", "Neutral", "Angry", "Disgust", "Excitement", "Fear", "Concern", "Interest", "Surprise", "Curiosity"]
 encoded_list = [tokenizer(i)['input_ids'][1] for i in emotion_list]
 
 @app.route('/', methods=['POST'])
