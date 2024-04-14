@@ -34,11 +34,14 @@ encoded_list = [tokenizer(i)['input_ids'][1] for i in emotion_list]
 
 @app.route('/', methods=['POST'])
 def classify_conversation():
+    time0 = time.time()
     data = request.get_json()
 
+    time1 = time.time()
     utext = convert_to_string(data)
     input_ids = get_input_ids(utext, tokenizer, emotion_list)
     new_input_ids = input_ids.to(device).clone()
+    time2 = time.time()
     with torch.no_grad():
         for _ in range(num_generated_tokens):
             outputs_l = model(new_input_ids)
@@ -58,8 +61,10 @@ def classify_conversation():
             next_token_id = torch.argmax(next_token_logits, dim=-1).unsqueeze(-1)
             # Append the generated token ID to the input for the next iteration
             new_input_ids = torch.cat((new_input_ids, next_token_id), dim=1)
-
+    time3 = time.time()
     emotion_prob_map = normalize_probs_and_map(exp_probabilities, emotion_list)
+    time4 = time.time()
+    print(f'times {time1 - time0} {time2 - time1} {time3 - time2} {time4 - time3}')
     return emotion_prob_map
 
 
