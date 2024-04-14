@@ -23,6 +23,8 @@ model_id = "google/gemma-2b"
 is_cuda_available = torch.cuda.is_available()
 device = 'cuda' if is_cuda_available else 'cpu'
 
+print("Using device:", device)
+
 
 tokenizer = AutoTokenizer.from_pretrained(model_id)
 model = AutoModelForCausalLM.from_pretrained(model_id)
@@ -31,6 +33,10 @@ model = model.to(device)
 
 emotion_list = ["Happy", "Sad", "Neutral", "Angry", "Disgust", "Excitement", "Fear", "Concern", "Interest", "Surprise", "Curiosity"]
 encoded_list = [tokenizer(i)['input_ids'][1] for i in emotion_list]
+
+@app.route('/ping', methods=['GET'])
+def pong():
+    return 'pong'
 
 @app.route('/', methods=['POST'])
 def classify_conversation():
@@ -64,7 +70,7 @@ def classify_conversation():
     time3 = time.time()
     emotion_prob_map = normalize_probs_and_map(exp_probabilities, emotion_list)
     time4 = time.time()
-    print(f'times {time1 - time0} {time2 - time1} {time3 - time2} {time4 - time3}')
+    print(f'times 1{time1 - time0} 2{time2 - time1} 3{time3 - time2} 4{time4 - time3}')
     return emotion_prob_map
 
 
