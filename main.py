@@ -37,7 +37,7 @@ def classify_conversation():
     data = request.get_json()
 
     utext = convert_to_string(data)
-    input_ids = get_input_ids(utext, tokenizer)
+    input_ids = get_input_ids(utext, tokenizer, emotion_list)
     new_input_ids = input_ids.to(device).clone()
     with torch.no_grad():
         for _ in range(num_generated_tokens):
@@ -59,7 +59,7 @@ def classify_conversation():
             # Append the generated token ID to the input for the next iteration
             new_input_ids = torch.cat((new_input_ids, next_token_id), dim=1)
 
-    emotion_prob_map = normalize_probs_and_map(exp_probabilities)
+    emotion_prob_map = normalize_probs_and_map(exp_probabilities, emotion_list)
     return emotion_prob_map
 
 
