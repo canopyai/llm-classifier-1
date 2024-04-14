@@ -60,12 +60,7 @@ def classify_conversation():
             new_input_ids = torch.cat((new_input_ids, next_token_id), dim=1)
 
     emotion_prob_map = normalize_probs_and_map(exp_probabilities)
-    print(emotion_prob_map)
-
-
-    
-    print(utext)
-    return utext
+    return emotion_prob_map
 
 
 if __name__ == '__main__':
